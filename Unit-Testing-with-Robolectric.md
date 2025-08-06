@@ -10,7 +10,7 @@ Robolectric provides [a documentation](https://robolectric.org/getting-started/)
 
 ```gradle
 dependencies {
-    testImplementation 'org.robolectric:robolectric:4.14'
+    testImplementation 'org.robolectric:robolectric:4.15.1'
 }
 ```
 
@@ -28,6 +28,7 @@ The code below shows a basic Robolectric test that verifies the text inside of a
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+@Config(sdk = Config.OLDEST_SDK)
 @RunWith(RobolectricTestRunner.class)
 public class MainActivityTest {
     private MainActivity activity;
@@ -91,9 +92,9 @@ When an Android class is instantiated, Robolectric first looks to see if it has 
 
 Let's assume our `MainActivity` has a `Button` that launches a `SecondActivity`. We'd like to validate that clicking on the button launches the correct activity with an automated test.  
 
-**Side Note:** This brings up an important point about Robolectric. Since it's a unit testing framework, a single test only has the capability to work with a particular "unit" (i.e. an Activity, a Fragment, an adapter, etc). It doesn't have the ability to create integration or end to end tests that span across several activities. If we think about our scenario where we have a button that launches a second Activity, Robolectric is only able to validate that the second Activity ***would*** have been launched, but not that it is actually launched.
+**Side Note:** This brings up an important point about Robolectric. Since it's a unit testing framework, a single test only has the capability to work with a particular "unit" (i.e. an `Activity`, a `Fragment`, an adapter, etc). It doesn't have the ability to create integration or end to end tests that span across several activities. If we think about our scenario where we have a button that launches a second `Activity`, Robolectric is only able to validate that the second `Activity` ***would*** have been launched, but not that it is actually launched.
 
-The test below uses shadows to validate that the correct Activity is launched when the button is clicked.
+The test below uses shadows to validate that the correct `Activity` is launched when the button is clicked.
 
 ```java
 @Test
@@ -137,13 +138,14 @@ While Robolectric provides a base set of shadow classes, there are others that n
 |--------------------------------------|------------------------------------|
 | org.apache.httpcomponents:httpclient | org.robolectric:shadows-httpclient |
 
-## Testing the Activity Lifecycle
+## Testing the `Activity` Lifecycle
 
-Dealing with the Activity lifecycle is a common source of bugs in Android. Fortunately, Robolectric allows you to test the Activity lifecycle. Below you'll see how we've added some Activity lifecycle tests to our `MainActivityTest` class.
+Dealing with the `Activity` lifecycle is a common source of bugs in Android. Fortunately, Robolectric allows you to test the `Activity` lifecycle. Below you'll see how we've added some `Activity` lifecycle tests to our `MainActivityTest` class.
 
-### Simulating the Full Activity Lifecycle
+### Simulating the Full `Activity` Lifecycle
 
 ```java
+@Config(sdk = Config.OLDEST_SDK)
 @RunWith(RobolectricGradleTestRunner.class)
 public class MainActivityTest {
     // ActivityController is a Robolectric class that drives the Activity lifecycle
@@ -189,7 +191,7 @@ public class MainActivityTest {
 }
 ```
 
-### Simulating Activity State Change
+### Simulating `Activity` State Change
 
 ```java
 @Test
