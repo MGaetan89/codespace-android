@@ -10,7 +10,7 @@ Robolectric provides [a documentation](https://robolectric.org/getting-started/)
 
 ```gradle
 dependencies {
-    testImplementation 'org.robolectric:robolectric:4.15.1'
+    testImplementation 'org.robolectric:robolectric:4.16'
 }
 ```
 
